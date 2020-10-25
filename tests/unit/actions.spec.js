@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { actions } from '../../src/store/actions'
 
 describe('Store Actions', () => {
