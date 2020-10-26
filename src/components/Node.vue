@@ -7,15 +7,15 @@
           <span class="accordion-header-url">{{node.url}}</span>
         </div>
         <v-badge
-            class="accordion-badge"
-            left
-            bordered
-            dot
-            inline
-            :color="getColor"
-          >
-            <span class="text-uppercase accordion-status-text">{{ getStatusText }}</span>
-          </v-badge> 
+          class="accordion-badge"
+          left
+          bordered
+          dot
+          inline
+          :color="getColor"
+        >
+          <span class="text-uppercase accordion-status-text">{{ getStatusText }}</span>
+        </v-badge> 
       </div>
     </v-expansion-panel-header>
     <v-expansion-panel-content>
@@ -39,10 +39,10 @@ export default {
   }),
   computed: {
     getColor() {
-      let badgeColor = '#EB5757';
+      let badgeColor = '#Eb5757';
 
       if(this.node.online) {
-        badgeColor = "#18CC55";
+        badgeColor = "#18cc55";
       }
       return badgeColor;
     },

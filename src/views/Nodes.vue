@@ -3,8 +3,7 @@
     <h1 class="main-title">Nodes</h1>
     <v-row justify="center" class="accordion">
       <v-expansion-panels accordion
-        v-for="(item,i) in getNodes"
-        :key="i">
+        v-for="(item,i) in getNodes" :key="i">
           <node :key="i" :node="{
             name: item.name,
             online: item.online,
@@ -31,9 +30,6 @@ export default {
   }),
   computed: {
     ...mapGetters(['getNodes']),
-    test() {
-      return this.$store.getters.getNodes;
-    }
   },
   methods: {
     ...mapActions(['getAllNodes']),
