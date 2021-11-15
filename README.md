@@ -1,5 +1,7 @@
 # toy-blocks-client-vue
 
+ **Do not fork or push this to a public repository**
+ 
 ## Project setup
 ```
 npm install
