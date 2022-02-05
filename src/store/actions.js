@@ -17,4 +17,23 @@ export const actions = {
       }
     }
   },
-}
+	async getBlocks({ commit }, node) {
+		await commit('setLoadingBlock', { url: node.url, value: true });
+
+		try {
+			const res = await fetch(`${node.url}/api/v1/blocks`);
+			const response = await res.json();
+
+			await commit('setLoadingBlock', { url: node.url, value: false });
+			await commit('loadBlockSuccess', { url: node.url, value: response.data });
+
+			return response;
+		} catch (e) {
+			await commit('loadBlockFailure', { url: node.url, value: true });
+		}
+
+
+
+
+	},
+};

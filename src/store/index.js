@@ -13,7 +13,8 @@ export default new Vuex.Store({
   getters: {
     getNodes : state => {
       return state.nodes.list;
-    }
+    },
+    getNodeByUrl: state => url => state.nodes.list.find(node => node.url == url),
   },
   mutations: mutations,
   actions: actions,

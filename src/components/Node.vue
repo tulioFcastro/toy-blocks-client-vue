@@ -19,13 +19,15 @@
       </div>
     </v-expansion-panel-header>
     <v-expansion-panel-content>
-      <span>Here goes the content</span>
+      <block :node="node" />
     </v-expansion-panel-content>
   </v-expansion-panel>
 </template>
 
 <script>
+import Block from './Block.vue';
 export default {
+  components: { Block },
   name: 'node',
   props: {
     node: {

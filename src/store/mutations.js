@@ -61,4 +61,25 @@ export const mutations = {
       ]
     }
   },
+
+	// BLOCKS
+	setLoadingBlock(state, { url, value }) {
+		const index = state.nodes.list.findIndex((t) => t.url === url);
+		if (index >= 0) {
+			state.nodes.list[index].blocksServerOnline = value;
+		}
+	},
+	loadBlockSuccess(state, { url, value }) {
+		const index = state.nodes.list.findIndex((t) => t.url === url);
+		if (index >= 0) {
+			state.nodes.list[index].blocks = value;
+			state.nodes.list[index].blocksServerOnline = true;
+		}
+	},
+	loadBlockFailure(state, { url, value }) {
+		const index = state.nodes.list.findIndex((t) => t.url === url);
+		if (index >= 0) {
+			state.nodes.list[index].blocks = value;
+		}
+	},
 }

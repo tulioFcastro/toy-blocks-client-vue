@@ -5,7 +5,9 @@ describe('Store Mutations', () => {
   const { 
     checkNodeStatusStart, 
     checkNodeStatusSuccess, 
-    checkNodeStatusFailure 
+    checkNodeStatusFailure,
+    setLoadingBlock,
+    loadBlockSuccess,
     } = mutations; 
 
   const initState = initialState();
@@ -31,5 +33,19 @@ describe('Store Mutations', () => {
     checkNodeStatusFailure(initState, { url: initState.nodes.list[0].url });
     expect(initState.nodes.list[0].loading).toEqual(false);
     expect(initState.nodes.list[0].online).toEqual(false);
+  });
+
+  it('setLoadingBlock', () => {
+    expect(initState.nodes.list[0].loadingBlock).toBeFalsy();
+    setLoadingBlock(initState, { url: initState.nodes.list[0].url, value: true });
+    expect(initState.nodes.list[0].loadingBlock).toBeTruthy();
+    setLoadingBlock(initState, { url: initState.nodes.list[0].url, value: false });
+    expect(initState.nodes.list[0].loadingBlock).toBeFalsy();
+  });
+
+  it('loadBlockSuccess', () => {
+    expect(initState.nodes.list[0].blocks).toBeUndefined();
+    loadBlockSuccess(initState, { url: initState.nodes.list[0].url, value: [{ id: 1 }] });
+    expect(initState.nodes.list[0].blocks).toEqual([{ id: 1 }]);
   });
 });
