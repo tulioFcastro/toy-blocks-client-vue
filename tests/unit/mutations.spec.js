@@ -8,9 +8,14 @@ describe('Store Mutations', () => {
     checkNodeStatusFailure,
     setLoadingBlock,
     loadBlockSuccess,
+    loadBlockFailure,
     } = mutations; 
 
-  const initState = initialState();
+  let initState;
+
+  beforeEach(() => {
+    initState = initialState();
+  });
 
   it('checkNodeStatusStart', () => {
       checkNodeStatusStart(initState, { url: initState.nodes.list[0].url });
@@ -47,5 +52,15 @@ describe('Store Mutations', () => {
     expect(initState.nodes.list[0].blocks).toBeUndefined();
     loadBlockSuccess(initState, { url: initState.nodes.list[0].url, value: [{ id: 1 }] });
     expect(initState.nodes.list[0].blocks).toEqual([{ id: 1 }]);
+  });
+
+  it('loadBlockFailure', () => {
+    initState.nodes.list[0].blocks = [{ id: 1 }];
+    initState.nodes.list[0].blocksServerOnline = true;
+    expect(initState.nodes.list[0].blocks).toBeDefined();
+    expect(initState.nodes.list[0].blocksServerOnline).toBeTruthy();
+    loadBlockFailure(initState, { url: initState.nodes.list[0].url });
+    expect(initState.nodes.list[0].blocks).toBeUndefined();
+    expect(initState.nodes.list[0].blocksServerOnline).toBeFalsy();
   });
 });

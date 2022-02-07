@@ -66,7 +66,7 @@ export const mutations = {
 	setLoadingBlock(state, { url, value }) {
 		const index = state.nodes.list.findIndex((t) => t.url === url);
 		if (index >= 0) {
-			state.nodes.list[index].blocksServerOnline = value;
+			state.nodes.list[index].loadingBlock = value;
 		}
 	},
 	loadBlockSuccess(state, { url, value }) {
@@ -76,10 +76,11 @@ export const mutations = {
 			state.nodes.list[index].blocksServerOnline = true;
 		}
 	},
-	loadBlockFailure(state, { url, value }) {
+	loadBlockFailure(state, { url }) {
 		const index = state.nodes.list.findIndex((t) => t.url === url);
 		if (index >= 0) {
-			state.nodes.list[index].blocks = value;
+			state.nodes.list[index].blocks = undefined;
+			state.nodes.list[index].blocksServerOnline = false;
 		}
 	},
 }

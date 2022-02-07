@@ -1,8 +1,11 @@
 import { actions } from '../../src/store/actions';
 
 describe('Store Actions', () => {
-	describe('#getAllNodes', () => {
+	beforeAll(() => {
 		global.fetch = jest.fn();
+	});
+
+	describe('#getAllNodes', () => {
 
 		beforeEach(() => {
 			fetch.mockResolvedValue({

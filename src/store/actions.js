@@ -29,7 +29,7 @@ export const actions = {
 
 			return response;
 		} catch (e) {
-			await commit('loadBlockFailure', { url: node.url, value: true });
+			await commit('loadBlockFailure', node);
 		}
 
 
