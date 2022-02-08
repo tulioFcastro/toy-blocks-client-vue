@@ -80,6 +80,7 @@ describe('Store Actions', () => {
 				},
 			],
 		};
+	
 		beforeEach(() => {
 			fetch.mockResolvedValue({
 				json: () => Promise.resolve(respone),
@@ -113,7 +114,7 @@ describe('Store Actions', () => {
 			});
 		});
 
-		it('getAllNodes With failure', async () => {
+		it('getBlocks With failure', async () => {
 			const commit = jest.fn();
 			fetch.mockImplementationOnce(() => Promise.reject());
 			const block = {
@@ -129,10 +130,10 @@ describe('Store Actions', () => {
 				},
 			};
 			const param = block.nodes.list;
-			await actions.getAllNodes({ commit }, param);
+			await actions.getBlocks({ commit }, param[0]);
 			expect(commit).toHaveBeenCalledTimes(2);
-			expect(commit).toHaveBeenCalledWith('checkNodeStatusStart', param[0]);
-			expect(commit).toHaveBeenCalledWith('checkNodeStatusFailure', param[0]);
+			expect(commit).toHaveBeenCalledWith('setLoadingBlock', { url: param[0].url, value: true });
+			expect(commit).toHaveBeenCalledWith('loadBlockFailure', param[0]);
 		});
 	});
 });

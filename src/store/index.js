@@ -11,9 +11,7 @@ export default new Vuex.Store({
     ...initialState()
   },
   getters: {
-    getNodes : state => {
-      return state.nodes.list;
-    },
+    getNodes : state => state.nodes.list,
     getNodeByUrl: state => url => state.nodes.list.find(node => node.url == url),
   },
   mutations: mutations,

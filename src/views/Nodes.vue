@@ -3,7 +3,7 @@
 		<h1 class="main-title">Nodes</h1>
 		<v-row justify="center" class="accordion">
 			<v-expansion-panels accordion v-for="(item, i) in getNodes" :key="i">
-				<node :key="i" :node="item" />
+				<node :node="item" />
 			</v-expansion-panels>
 		</v-row>
 	</div>

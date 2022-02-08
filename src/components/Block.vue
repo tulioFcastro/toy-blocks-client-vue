@@ -1,6 +1,6 @@
 <template>
 	<div v-if="!node.online">Service Offline</div>
-	<div v-else-if="error">Load block error</div>
+	<div v-else-if="error"><button @click="fethBlockData">Try again</button></div>
 	<div v-else-if="loading">Loading...</div>
 	<div v-else class="block__container d-flex flex-column">
 		<div
@@ -25,19 +25,11 @@
 				name: String,
 				loading: Boolean,
 				blocks: Object,
+				// more informations here...
 			},
 		},
 		async created() {
-			if (this.node.online) {
-				try {
-					this.loading = true;
-					await this.getBlocks(this.node);
-				} catch (error) {
-					this.error = true;
-				} finally {
-					this.loading = false;
-				}
-			}
+			this.fethBlockData();
 		},
 		data: () => ({
 			loading: false,
@@ -50,31 +42,24 @@
 					num
 				);
 			},
+			async fethBlockData() {
+				if (this.node.online) {
+					try {
+						this.error = false;
+						this.loading = true;
+						await this.getBlocks(this.node);
+					} catch (error) {
+						this.error = true;
+					} finally {
+						this.loading = false;
+					}
+				}
+			}
 		},
 		computed: {
 			...mapGetters(['getNodeByUrl']),
 			myBlocks() {
 				return this.getNodeByUrl(this.node.url)?.blocks;
-			},
-			getColor() {
-				let badgeColor = '#Eb5757';
-
-				if (this.node.online) {
-					badgeColor = '#18cc55';
-				}
-				return badgeColor;
-			},
-			getStatusText() {
-				let statusText = 'Loading';
-
-				if (!this.node.loading) {
-					if (this.node.online) {
-						statusText = 'Online';
-					} else {
-						statusText = 'Offline';
-					}
-				}
-				return statusText;
 			},
 		},
 	};
